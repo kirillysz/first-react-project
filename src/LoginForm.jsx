@@ -4,22 +4,21 @@ import { loginUser } from "./api/auth.jsx";
 export function LoginForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [token, setToken] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError("");
 
         try {
             const data = await loginUser(username, password);
             console.log("Успешно вошел:", data);
+            setToken(data.access_token);
 
         } catch (error) {
-            if (error instanceof Response) {
-                // ошибка от fetch
-                const errData = await error.json().catch(() => ({}));
-                console.error("Ошибка сервера:", errData);
-            } else {
-                console.error("Ошибка:", error);
-            }
+            console.error("Ошибка:", error);
+            setError(error.message);
         }
     };
 
@@ -48,6 +47,8 @@ export function LoginForm() {
                     required
                 />
             </div>
+            {error && <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>}
+            {token && <div style={{ color: "blue", marginBottom: "10px" }}>{token}</div>}
             <button type="submit">Submit</button>
         </form>
     );
