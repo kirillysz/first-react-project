@@ -14,7 +14,7 @@ cd todolist_back
 Создайте `.env` файл с содержимым:
 
 ```
-DB_HOST=localhost
+DB_HOST=db
 DB_PORT=5432
 DB_USER=postgres
 DB_PASSWORD=postgres

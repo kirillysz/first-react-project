@@ -5,7 +5,6 @@ export function LoginForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const [token, setToken] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -14,7 +13,6 @@ export function LoginForm() {
         try {
             const data = await loginUser(username, password);
             console.log("Успешно вошел:", data);
-            setToken(data.access_token);
 
         } catch (error) {
             console.error("Ошибка:", error);
@@ -23,10 +21,10 @@ export function LoginForm() {
     };
 
     return (
-        <form className="login-form" onSubmit={handleSubmit}>
-            <h2>Login</h2>
-            <div className="form-group">
-                <label htmlFor="username">Username:</label>
+        <form className="flex flex-col space-y-4 w-full" onSubmit={handleSubmit}>
+            <h2 className="text-xl font-semibold text-center">Логин</h2>
+            <div className="flex flex-col">
+                <label htmlFor="username" className="text-sm font-medium mb-1">Username:</label>
                 <input
                     type="text"
                     id="username"
@@ -34,10 +32,11 @@ export function LoginForm() {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
             </div>
-            <div className="form-group">
-                <label htmlFor="password">Password:</label>
+            <div className="flex flex-col">
+                <label htmlFor="password" className="text-sm font-medium mb-1">Password:</label>
                 <input
                     type="password"
                     id="password"
@@ -45,11 +44,15 @@ export function LoginForm() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
             </div>
+            
             {error && <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>}
-            {token && <div style={{ color: "blue", marginBottom: "10px" }}>{token}</div>}
-            <button type="submit">Submit</button>
+            <div style={{ color: "blue", marginBottom: "10px" }}>token here</div>
+
+            <button type="submit" 
+            className="w-full py-2 rounded-lg bg-blue-900 text-white font-medium hover:bg-blue-700 transition">Submit</button>
         </form>
     );
 }
