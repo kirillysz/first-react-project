@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { registerUser } from "./api/auth.jsx";
+import { registerUser } from "./api/auth.js";
 
 export function RegisterForm() {
   const [username, setUsername] = useState("");

@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { loginUser } from "./api/auth.jsx";
+import { loginUser } from "./api/auth.js";
 
-export function LoginForm() {
+
+export function LoginForm({ onLogin }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -13,7 +14,7 @@ export function LoginForm() {
         try {
             const data = await loginUser(username, password);
             console.log("Успешно вошел:", data);
-
+            onLogin();
         } catch (error) {
             console.error("Ошибка:", error);
             setError(error.message);
