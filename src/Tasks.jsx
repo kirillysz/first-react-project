@@ -32,17 +32,17 @@ export function Tasks() {
     if (loading) return <div className="text-center">Загрузка задач...</div>;
     
     return (
-        <div className="max-w-md mx-auto p-4">
-            <h2 className="text-xl font-bold mb-4">Задачи</h2>
+        <div className="w-full h-screen p-4 overflow-y-auto bg-gray-50">
+            <h2 className="text-2xl font-bold mb-4">Задачи</h2>
             {error && (
                 <div className="text-red-500 mb-2 p-2 bg-red-100 rounded">
                     {error}
                 </div>
             )}
-            <ul className="space-y-2">
+            <ul className="space-y-4">
                 {tasks.map((task) => (
-                    <li key={task.id} className="border p-2 rounded">
-                        <h3 className="font-semibold">{task.title}</h3>
+                    <li key={task.id} className="border p-4 rounded bg-white shadow">
+                        <h3 className="font-semibold text-lg">{task.title}</h3>
                         <p>{task.description}</p>
                         <p>Status: {task.completed ? "Выполнено" : "В процессе"}</p>
                     </li>

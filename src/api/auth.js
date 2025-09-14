@@ -1,5 +1,19 @@
 import axios from "axios";
 
+export async function checkAuth() {
+  try {
+    const response = await axios.get("http://localhost:8000/auth/check", {
+      withCredentials: true
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error("Ошибка проверки авторизации:", error);
+    throw error;
+  }
+}
+
+
 export async function registerUser(username, password) {
   try {
     const response = await axios.post(
